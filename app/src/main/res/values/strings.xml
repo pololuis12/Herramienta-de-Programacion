@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DogCare</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="lista_servicios">
+        <item>Consulta general</item>
+        <item>Vacunación</item>
+        <item>Baño y peluquería</item>
+        <item>Cirugía menor</item>
+        <item>Desparasitación</item>
+    </string-array>
+</resources>
