@@ -2,151 +2,155 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivFotoPerfil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@color/beige"
+            android:contentDescription="Foto de perfil"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_camera"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.DogCare.Circle"
+            app:strokeColor="@color/green"
+            app:strokeWidth="3dp" />
 
         <TextView
-            android:id="@+id/tvPerfilTitle"
+            android:id="@+id/tvPetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Perfil de la Mascota"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/brown"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginTop="12dp"
+            android:text="Lucas"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <!-- Header con Foto de Perfil y Datos Básicos -->
+        <TextView
+            android:id="@+id/tvPetBreed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Golden Retriever"
+            android:textColor="@color/brown" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="12dp"
+            android:layout_marginTop="16dp"
             android:background="@color/beige"
-            android:layout_marginBottom="16dp">
+            android:orientation="vertical"
+            android:padding="12dp">
 
-            <ImageView
-                android:id="@+id/ivPetPhoto"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_dog_avatar"
-                android:contentDescription="Foto de la mascota" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <TextView
+                android:id="@+id/tvPetEdad"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvPetName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lucas"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/tvPetPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvPetBreed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Golden Retriever"
-                    android:textSize="14sp"
-                    android:textColor="@color/brown" />
+            <TextView
+                android:id="@+id/tvDueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/tvPetAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edad: 3 años"
-                    android:textSize="13sp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tvTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvProximaCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/green" />
+
         </LinearLayout>
 
-        <!-- Información Médica y Características -->
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTituloDescripcion"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Información General"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:text="Sobre la mascota"
             android:textColor="@color/green"
-            android:layout_marginBottom="8dp" />
+            android:textStyle="bold" />
 
+        <!-- Texto largo con su propia barra de desplazamiento para no ocupar toda la pantalla. -->
         <TextView
-            android:id="@+id/tvPetWeight"
+            android:id="@+id/tvDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/beige"
+            android:fadeScrollbars="false"
+            android:padding="10dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btnEditarPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Peso: 28 kg"
-            android:textSize="14sp"
-            android:paddingBottom="4dp" />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/green"
+            android:text="Editar perfil"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/tvPetGender"
+        <Button
+            android:id="@+id/btnCambiarFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Género: Macho (Esterilizado)"
-            android:textSize="14sp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/tvPetMicrochip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Microchip: ID 985141002345678"
-            android:textSize="14sp"
-            android:paddingBottom="4dp" />
-
-        <TextView
-            android:id="@+id/tvPetVaccines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vacunación: Al día (Séxtuple, Rabia, Tos de perreras)"
-            android:textSize="14sp"
-            android:paddingBottom="12dp" />
-
-        <!-- Datos del Propietario -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Datos del Propietario"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/green"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            android:backgroundTint="@color/brown"
+            android:text="Cambiar foto de perfil"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/tvOwnerName"
+        <Button
+            android:id="@+id/btnVerFotos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Propietario: Carlos Gómez"
-            android:textSize="14sp"
-            android:paddingBottom="4dp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/brown"
+            android:text="Ver fotos"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/tvOwnerPhone"
+        <Button
+            android:id="@+id/btnHistoriaClinica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Teléfono: +57 300 123 4567"
-            android:textSize="14sp"
-            android:paddingBottom="4dp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/green"
+            android:text="Historia clínica"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/tvOwnerEmail"
+        <Button
+            android:id="@+id/btnAgendarDesdePerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email: carlos.gomez@email.com"
-            android:textSize="14sp"
-            android:paddingBottom="4dp" />
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/beige"
+            android:text="Agendar cita"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 </ScrollView>

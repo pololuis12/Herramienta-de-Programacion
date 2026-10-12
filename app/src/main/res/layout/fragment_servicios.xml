@@ -70,5 +70,15 @@
             android:text="Selecciona un servicio para ver el detalle."
             android:textSize="15sp" />
 
+        <Button
+            android:id="@+id/btnAgendarServicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Agendar este servicio"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
     </LinearLayout>
 </ScrollView>

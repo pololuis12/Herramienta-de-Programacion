@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Vista ampliada de una foto con su descripción y navegación. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="20dp">
+
+    <TextView
+        android:id="@+id/tvPosicionFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/brown"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/ivFotoAmpliada"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/beige"
+        android:contentDescription="Foto ampliada"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/tvDescripcionFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:maxLines="4"
+        android:scrollbars="vertical"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnFotoAnterior"
+            style="@style/DogCare.BotonControl"
+            android:backgroundTint="@color/brown"
+            android:text="◀ Anterior" />
+
+        <Button
+            android:id="@+id/btnFotoSiguiente"
+            style="@style/DogCare.BotonControl"
+            android:layout_marginStart="6dp"
+            android:backgroundTint="@color/brown"
+            android:text="Siguiente ▶" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnUsarPerfil"
+            style="@style/DogCare.BotonControl"
+            android:backgroundTint="@color/green"
+            android:text="Usar como perfil" />
+
+        <Button
+            android:id="@+id/btnEliminarFoto"
+            style="@style/DogCare.BotonControl"
+            android:layout_marginStart="6dp"
+            android:backgroundTint="@color/estado_cancelada"
+            android:text="Eliminar" />
+
+    </LinearLayout>
+</LinearLayout>

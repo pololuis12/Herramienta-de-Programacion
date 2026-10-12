@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Módulo Web: caja de texto para la URL, botones de navegación y WebView. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Navegador web"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etUrl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="url"
+            android:hint="Escribe una dirección web"
+            android:imeOptions="actionGo"
+            android:inputType="textUri"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btnIr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/green"
+            android:minWidth="0dp"
+            android:text="Ir"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAtras"
+            style="@style/DogCare.BotonControl"
+            android:backgroundTint="@color/brown"
+            android:contentDescription="Página anterior"
+            android:text="◀"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnAdelante"
+            style="@style/DogCare.BotonControl"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/brown"
+            android:contentDescription="Página siguiente"
+            android:text="▶"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnRecargar"
+            style="@style/DogCare.BotonControl"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/brown"
+            android:contentDescription="Recargar página"
+            android:text="↻"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnInicio"
+            style="@style/DogCare.BotonControl"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/green"
+            android:contentDescription="Página de inicio"
+            android:text="Inicio" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbCarga"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:max="100"
+        android:progressTint="@color/green"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvErrorWeb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/beige"
+        android:padding="8dp"
+        android:textColor="@color/estado_cancelada"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
