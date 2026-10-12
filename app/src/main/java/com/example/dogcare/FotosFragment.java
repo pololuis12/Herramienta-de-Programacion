@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -78,7 +83,7 @@ public class FotosFragment extends Fragment {
         adapter = new FotosAdapter();
         gvFotos.setAdapter(adapter);
         gvFotos.setOnItemClickListener((parent, v, position, id) ->
-                mostrarOpcionesFoto(fotos.get(position)));
+                mostrarFoto(position));
 
         view.findViewById(R.id.btnAgregarFotos).setOnClickListener(v ->
                 seleccionarFotos.launch(new PickVisualMediaRequest.Builder()
@@ -106,29 +111,86 @@ public class FotosFragment extends Fragment {
         tvSinFotos.setVisibility(fotos.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
-    private void mostrarOpcionesFoto(String uri) {
-        ImageView vistaPrevia = new ImageView(requireContext());
-        vistaPrevia.setAdjustViewBounds(true);
-        vistaPrevia.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        int padding = (int) (16 * getResources().getDisplayMetrics().density);
-        vistaPrevia.setPadding(padding, padding, padding, 0);
-        ImageLoader.cargar(vistaPrevia, uri, 1024);
+    /** Muestra la foto ampliada con su descripción; permite pasar a la anterior o siguiente. */
+    private void mostrarFoto(int posicionInicial) {
+        View vista = getLayoutInflater().inflate(R.layout.dialog_foto, null);
+        TextView tvPosicion = vista.findViewById(R.id.tvPosicionFoto);
+        ImageView ivFoto = vista.findViewById(R.id.ivFotoAmpliada);
+        TextView tvDescripcion = vista.findViewById(R.id.tvDescripcionFoto);
+        Button btnAnterior = vista.findViewById(R.id.btnFotoAnterior);
+        Button btnSiguiente = vista.findViewById(R.id.btnFotoSiguiente);
+        Button btnUsarPerfil = vista.findViewById(R.id.btnUsarPerfil);
+        tvDescripcion.setMovementMethod(new ScrollingMovementMethod());
 
-        boolean esFotoPerfil = uri.equals(repo.getFotoPerfil());
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(vista)
+                .setPositiveButton("Editar descripción", null)
+                .setNeutralButton("Cerrar", null)
+                .create();
+
+        int[] posicion = {posicionInicial};
+        Runnable mostrar = () -> {
+            String uri = fotos.get(posicion[0]);
+            tvPosicion.setText("Foto " + (posicion[0] + 1) + " de " + fotos.size());
+            ImageLoader.cargar(ivFoto, uri, 1024);
+            String descripcion = repo.getDescripcionFoto(uri);
+            tvDescripcion.setText(descripcion.isEmpty()
+                    ? "Sin descripción. Toca «Editar descripción» para agregar una." : descripcion);
+            tvDescripcion.scrollTo(0, 0);
+            btnAnterior.setEnabled(posicion[0] > 0);
+            btnSiguiente.setEnabled(posicion[0] < fotos.size() - 1);
+            boolean esFotoPerfil = uri.equals(repo.getFotoPerfil());
+            btnUsarPerfil.setEnabled(!esFotoPerfil);
+            btnUsarPerfil.setText(esFotoPerfil ? "Foto de perfil" : "Usar como perfil");
+        };
+
+        btnAnterior.setOnClickListener(v -> {
+            posicion[0]--;
+            mostrar.run();
+        });
+        btnSiguiente.setOnClickListener(v -> {
+            posicion[0]++;
+            mostrar.run();
+        });
+        btnUsarPerfil.setOnClickListener(v -> {
+            repo.setFotoPerfil(fotos.get(posicion[0]));
+            actualizarFotos();
+            mostrar.run();
+            Toast.makeText(requireContext(), "Foto de perfil actualizada", Toast.LENGTH_SHORT).show();
+        });
+        vista.findViewById(R.id.btnEliminarFoto).setOnClickListener(v -> {
+            dialog.dismiss();
+            confirmarEliminar(fotos.get(posicion[0]));
+        });
+        // Se sobreescribe el botón para que el diálogo siga abierto tras editar.
+        dialog.setOnShowListener(d -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setOnClickListener(v -> editarDescripcion(fotos.get(posicion[0]), mostrar)));
+
+        mostrar.run();
+        dialog.show();
+    }
+
+    private void editarDescripcion(String uri, Runnable alGuardar) {
+        EditText etDescripcion = new EditText(requireContext());
+        etDescripcion.setHint("Ej.: Lucas después del baño en la clínica");
+        etDescripcion.setInputType(InputType.TYPE_CLASS_TEXT
+                | InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        etDescripcion.setMaxLines(5);
+        etDescripcion.setText(repo.getDescripcionFoto(uri));
+        FrameLayout contenedor = new FrameLayout(requireContext());
+        int margen = (int) (20 * getResources().getDisplayMetrics().density);
+        contenedor.setPadding(margen, margen / 2, margen, 0);
+        contenedor.addView(etDescripcion);
 
         new AlertDialog.Builder(requireContext())
-                .setView(vistaPrevia)
-                .setPositiveButton(esFotoPerfil ? "Es la foto de perfil" : "Usar como perfil",
-                        (d, w) -> {
-                            if (!esFotoPerfil) {
-                                repo.setFotoPerfil(uri);
-                                actualizarFotos();
-                                Toast.makeText(requireContext(), "Foto de perfil actualizada",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                .setNegativeButton("Eliminar", (d, w) -> confirmarEliminar(uri))
-                .setNeutralButton("Cerrar", null)
+                .setTitle("Descripción de la foto")
+                .setView(contenedor)
+                .setPositiveButton("Guardar", (d, w) -> {
+                    repo.setDescripcionFoto(uri, etDescripcion.getText().toString().trim());
+                    alGuardar.run();
+                    Toast.makeText(requireContext(), "Descripción guardada", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancelar", null)
                 .show();
     }
 

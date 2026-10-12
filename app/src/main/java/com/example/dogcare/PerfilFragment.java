@@ -1,6 +1,8 @@
 package com.example.dogcare;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,8 @@ public class PerfilFragment extends Fragment {
     private TextView tvDueno;
     private TextView tvTelefono;
     private TextView tvProximaCita;
+    private TextView tvTituloDescripcion;
+    private TextView tvDescripcion;
     private Button btnVerFotos;
 
     private final ActivityResultLauncher<PickVisualMediaRequest> seleccionarFoto =
@@ -47,6 +51,7 @@ public class PerfilFragment extends Fragment {
         // Constructor vacío requerido
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +67,16 @@ public class PerfilFragment extends Fragment {
         tvTelefono = view.findViewById(R.id.tvTelefono);
         tvProximaCita = view.findViewById(R.id.tvProximaCita);
         btnVerFotos = view.findViewById(R.id.btnVerFotos);
+        tvTituloDescripcion = view.findViewById(R.id.tvTituloDescripcion);
+        tvDescripcion = view.findViewById(R.id.tvDescripcion);
+
+        // El texto se desplaza dentro de su caja sin mover toda la pantalla.
+        tvDescripcion.setMovementMethod(new ScrollingMovementMethod());
+        tvDescripcion.setOnTouchListener((v, event) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(v.canScrollVertically(1)
+                    || v.canScrollVertically(-1));
+            return false;
+        });
 
         ivFotoPerfil.setOnClickListener(v -> abrirSelectorFoto());
         view.findViewById(R.id.btnCambiarFoto).setOnClickListener(v -> abrirSelectorFoto());
@@ -90,6 +105,8 @@ public class PerfilFragment extends Fragment {
         tvPetPeso.setText("Peso: " + valorOVacio(repo.getPeso()));
         tvDueno.setText("Dueño: " + valorOVacio(repo.getDueno()));
         tvTelefono.setText("Teléfono: " + valorOVacio(repo.getTelefono()));
+        tvTituloDescripcion.setText("Sobre " + repo.getNombre());
+        tvDescripcion.setText(valorOVacio(repo.getDescripcion()));
 
         Cita proxima = repo.getProximaCita();
         tvProximaCita.setText(proxima != null
@@ -127,6 +144,7 @@ public class PerfilFragment extends Fragment {
         EditText etPeso = dialogView.findViewById(R.id.etPeso);
         EditText etDueno = dialogView.findViewById(R.id.etDueno);
         EditText etTelefono = dialogView.findViewById(R.id.etTelefono);
+        EditText etDescripcion = dialogView.findViewById(R.id.etDescripcion);
 
         etNombre.setText(repo.getNombre());
         etRaza.setText(repo.getRaza());
@@ -134,6 +152,7 @@ public class PerfilFragment extends Fragment {
         etPeso.setText(repo.getPeso());
         etDueno.setText(repo.getDueno());
         etTelefono.setText(repo.getTelefono());
+        etDescripcion.setText(repo.getDescripcion());
 
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setTitle("Editar perfil")
@@ -157,6 +176,7 @@ public class PerfilFragment extends Fragment {
                             etPeso.getText().toString().trim(),
                             etDueno.getText().toString().trim(),
                             etTelefono.getText().toString().trim());
+                    repo.setDescripcion(etDescripcion.getText().toString().trim());
                     mostrarDatos();
                     dialog.dismiss();
                     Toast.makeText(requireContext(), "Perfil guardado", Toast.LENGTH_SHORT).show();

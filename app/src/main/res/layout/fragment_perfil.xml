@@ -84,6 +84,29 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvTituloDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Sobre la mascota"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
+
+        <!-- Texto largo con su propia barra de desplazamiento para no ocupar toda la pantalla. -->
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/beige"
+            android:fadeScrollbars="false"
+            android:padding="10dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
         <Button
             android:id="@+id/btnEditarPerfil"
             android:layout_width="match_parent"

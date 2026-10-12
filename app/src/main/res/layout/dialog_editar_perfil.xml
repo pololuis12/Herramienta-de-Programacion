@@ -53,5 +53,16 @@
             android:hint="Teléfono de contacto"
             android:inputType="phone" />
 
+        <EditText
+            android:id="@+id/etDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:hint="Sobre la mascota: temperamento, alimentación, antecedentes…"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="6"
+            android:minLines="3"
+            android:scrollbars="vertical" />
+
     </LinearLayout>
 </ScrollView>

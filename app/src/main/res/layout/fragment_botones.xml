@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Módulo Botones: Button, ImageButton, ToggleButton, Switch, CheckBox y RadioButton
+     aplicados a la solicitud de un servicio en la clínica. -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Controles"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Arma tu solicitud de servicio; cada control muestra su evento abajo."
+            android:textColor="@color/brown"
+            android:textSize="12sp" />
+
+        <!-- RadioButton: tipo de consulta (solo una opción). -->
+        <TextView
+            style="@style/DogCare.TituloSeccion"
+            android:text="Tipo de consulta (RadioButton)" />
+
+        <RadioGroup
+            android:id="@+id/rgTipoConsulta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/rbGeneral">
+
+            <RadioButton
+                android:id="@+id/rbGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/green"
+                android:text="Consulta general · $45.000" />
+
+            <RadioButton
+                android:id="@+id/rbUrgencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/green"
+                android:text="Urgencia · $80.000" />
+
+        </RadioGroup>
+
+        <!-- CheckBox: servicios adicionales (varias opciones). -->
+        <TextView
+            style="@style/DogCare.TituloSeccion"
+            android:text="Servicios adicionales (CheckBox)" />
+
+        <CheckBox
+            android:id="@+id/cbBano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/green"
+            android:text="Baño · $35.000" />
+
+        <CheckBox
+            android:id="@+id/cbCorte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/green"
+            android:text="Corte de pelo · $30.000" />
+
+        <CheckBox
+            android:id="@+id/cbVacunacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/green"
+            android:text="Vacunación · $40.000" />
+
+        <!-- Switch: servicio a domicilio. -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/swDomicilio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Servicio a domicilio (Switch) · $15.000" />
+
+        <!-- ToggleButton: recordatorios de citas (estado real de la app). -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Recordatorios (ToggleButton)" />
+
+            <ToggleButton
+                android:id="@+id/tbRecordatorios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/beige"
+                android:textOff="OFF"
+                android:textOn="ON" />
+
+        </LinearLayout>
+
+        <!-- ImageButton: llamar a la clínica. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Llamar a la clínica (ImageButton)" />
+
+            <ImageButton
+                android:id="@+id/ibLlamar"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/fondo_circulo_verde"
+                android:contentDescription="Llamar a la clínica"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/sym_action_call"
+                android:tint="@color/white" />
+
+        </LinearLayout>
+
+        <!-- Button: acciones principales. -->
+        <Button
+            android:id="@+id/btnSolicitar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/green"
+            android:text="Agendar con esta selección"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnLimpiar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/brown"
+            android:text="Limpiar selección"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/beige"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/green"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</ScrollView>

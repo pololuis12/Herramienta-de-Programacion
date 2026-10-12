@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +26,9 @@ public class DogCareRepository {
     private static final String KEY_DUENO = "perfil_dueno";
     private static final String KEY_TELEFONO = "perfil_telefono";
     private static final String KEY_FOTO_PERFIL = "perfil_foto";
+    private static final String KEY_DESCRIPCION = "perfil_descripcion";
     private static final String KEY_FOTOS = "fotos";
+    private static final String KEY_FOTOS_DESCRIPCION = "fotos_descripcion";
     private static final String KEY_CITAS = "citas";
     private static final String KEY_RECORDATORIOS = "recordatorios_activos";
 
@@ -78,6 +81,26 @@ public class DogCareRepository {
                 .apply();
     }
 
+    /** Texto largo del perfil: temperamento, alimentación, antecedentes, etc. */
+    public String getDescripcion() {
+        return prefs.getString(KEY_DESCRIPCION, DESCRIPCION_INICIAL);
+    }
+
+    public void setDescripcion(String descripcion) {
+        prefs.edit().putString(KEY_DESCRIPCION, descripcion).apply();
+    }
+
+    private static final String DESCRIPCION_INICIAL =
+            "Temperamento: juguetón, sociable con otros perros y muy apegado a la familia.\n\n"
+                    + "Alimentación: concentrado para adulto de raza grande, dos raciones al día "
+                    + "(mañana y noche). Sin alergias alimentarias conocidas.\n\n"
+                    + "Vacunas: esquema completo (moquillo, parvovirus, hepatitis, rabia). "
+                    + "Refuerzo anual pendiente según el calendario de la clínica.\n\n"
+                    + "Desparasitación: interna cada 3 meses y externa mensual.\n\n"
+                    + "Antecedentes: otitis leve tratada a los 2 años. "
+                    + "Sin cirugías ni enfermedades crónicas.\n\n"
+                    + "Actividad: dos paseos diarios de 30 minutos; le gusta nadar y jugar con pelota.";
+
     public String getFotoPerfil() {
         return prefs.getString(KEY_FOTO_PERFIL, null);
     }
@@ -113,7 +136,24 @@ public class DogCareRepository {
         if (uri.equals(getFotoPerfil())) {
             editor.remove(KEY_FOTO_PERFIL);
         }
+        JSONObject descripciones = leerObjeto(KEY_FOTOS_DESCRIPCION);
+        descripciones.remove(uri);
+        editor.putString(KEY_FOTOS_DESCRIPCION, descripciones.toString());
         editor.apply();
+    }
+
+    public String getDescripcionFoto(String uri) {
+        return leerObjeto(KEY_FOTOS_DESCRIPCION).optString(uri, "");
+    }
+
+    public void setDescripcionFoto(String uri, String descripcion) {
+        JSONObject descripciones = leerObjeto(KEY_FOTOS_DESCRIPCION);
+        try {
+            descripciones.put(uri, descripcion);
+        } catch (JSONException ignored) {
+            return;
+        }
+        prefs.edit().putString(KEY_FOTOS_DESCRIPCION, descripciones.toString()).apply();
     }
 
     // ---------- Citas ----------
@@ -225,6 +265,14 @@ public class DogCareRepository {
             return;
         }
         prefs.edit().putString(KEY_CITAS, array.toString()).apply();
+    }
+
+    private JSONObject leerObjeto(String key) {
+        try {
+            return new JSONObject(prefs.getString(key, "{}"));
+        } catch (JSONException e) {
+            return new JSONObject();
+        }
     }
 
     private JSONArray leerArray(String key) {

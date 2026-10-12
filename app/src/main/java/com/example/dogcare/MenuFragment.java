@@ -9,12 +9,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+/** Fragmento izquierdo: menú permanente que cambia el contenido del panel derecho. */
 public class MenuFragment extends Fragment {
 
-    private Button btnPerfil;
-    private Button btnFotos;
-    private Button btnServicios;
-    private Button btnCitas;
+    private Button[] botones;
 
     private int seleccionId = R.id.btnPerfil;
 
@@ -30,13 +28,21 @@ public class MenuFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        btnPerfil = view.findViewById(R.id.btnPerfil);
-        btnFotos = view.findViewById(R.id.btnFotos);
-        btnServicios = view.findViewById(R.id.btnServicios);
-        btnCitas = view.findViewById(R.id.btnCitas);
+        Button btnPerfil = view.findViewById(R.id.btnPerfil);
+        Button btnFotos = view.findViewById(R.id.btnFotos);
+        Button btnVideo = view.findViewById(R.id.btnVideo);
+        Button btnWeb = view.findViewById(R.id.btnWeb);
+        Button btnBotones = view.findViewById(R.id.btnBotones);
+        Button btnServicios = view.findViewById(R.id.btnServicios);
+        Button btnCitas = view.findViewById(R.id.btnCitas);
+        botones = new Button[]{btnPerfil, btnFotos, btnVideo, btnWeb, btnBotones,
+                btnServicios, btnCitas};
 
         btnPerfil.setOnClickListener(v -> navegarA(new PerfilFragment()));
         btnFotos.setOnClickListener(v -> navegarA(new FotosFragment()));
+        btnVideo.setOnClickListener(v -> navegarA(new VideoFragment()));
+        btnWeb.setOnClickListener(v -> navegarA(new WebFragment()));
+        btnBotones.setOnClickListener(v -> navegarA(new BotonesFragment()));
         btnServicios.setOnClickListener(v -> navegarA(new ServiciosFragment()));
         btnCitas.setOnClickListener(v -> navegarA(new CitasFragment()));
 
@@ -51,10 +57,10 @@ public class MenuFragment extends Fragment {
 
     public void marcarSeleccion(int botonId) {
         seleccionId = botonId;
-        if (btnPerfil == null) {
+        if (botones == null) {
             return;
         }
-        for (Button boton : new Button[]{btnPerfil, btnFotos, btnServicios, btnCitas}) {
+        for (Button boton : botones) {
             boolean seleccionado = boton.getId() == botonId;
             boton.setAlpha(seleccionado ? 1f : 0.55f);
             boton.setSelected(seleccionado);

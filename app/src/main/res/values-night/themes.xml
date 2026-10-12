@@ -3,6 +3,9 @@
     <style name="Base.Theme.DogCare" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="fontFamily">@font/poppins_bold</item>
+        <!-- Colores de DogCare para switches, radios, checkboxes y selectores. -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorSecondary">@color/brown</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>
