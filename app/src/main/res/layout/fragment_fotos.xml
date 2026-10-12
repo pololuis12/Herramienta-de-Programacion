@@ -9,8 +9,62 @@
         android:id="@+id/tvFotosTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Galería de fotos"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="Galería de Fotos de Lucas"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/green"
+        android:layout_marginBottom="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFotos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <!-- Sección de Detalle y Vista Previa de la Foto Seleccionada -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@color/beige"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/tvFotoDetalleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalle de la foto:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/ivFotoPreview"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_dog_photo1"
+                android:contentDescription="Vista previa de la foto seleccionada" />
+
+            <TextView
+                android:id="@+id/tvFotoDetalle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Selecciona una foto de la galería para ver sus detalles."
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="12dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

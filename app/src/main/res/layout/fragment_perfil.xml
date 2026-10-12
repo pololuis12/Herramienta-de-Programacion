@@ -1,22 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tvPetName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lucas"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvPetBreed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Golden Retriever" />
+        <TextView
+            android:id="@+id/tvPerfilTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil de la Mascota"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/brown"
+            android:layout_marginBottom="12dp" />
 
-</LinearLayout>
+        <!-- Header con Foto de Perfil y Datos Básicos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@color/beige"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/ivPetPhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_dog_avatar"
+                android:contentDescription="Foto de la mascota" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/tvPetName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lucas"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvPetBreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Golden Retriever"
+                    android:textSize="14sp"
+                    android:textColor="@color/brown" />
+
+                <TextView
+                    android:id="@+id/tvPetAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edad: 3 años"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Información Médica y Características -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Información General"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvPetWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Peso: 28 kg"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvPetGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Género: Macho (Esterilizado)"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvPetMicrochip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Microchip: ID 985141002345678"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvPetVaccines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vacunación: Al día (Séxtuple, Rabia, Tos de perreras)"
+            android:textSize="14sp"
+            android:paddingBottom="12dp" />
+
+        <!-- Datos del Propietario -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datos del Propietario"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvOwnerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Propietario: Carlos Gómez"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvOwnerPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teléfono: +57 300 123 4567"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/tvOwnerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email: carlos.gomez@email.com"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+    </LinearLayout>
+</ScrollView>

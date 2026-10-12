@@ -1,72 +1,66 @@
 package com.example.dogcare;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PerfilFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 public class PerfilFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private TextView tvPerfilTitle;
+    private ImageView ivPetPhoto;
     private TextView tvPetName;
     private TextView tvPetBreed;
+    private TextView tvPetAge;
+    private TextView tvPetWeight;
+    private TextView tvPetGender;
+    private TextView tvPetMicrochip;
+    private TextView tvPetVaccines;
+    private TextView tvOwnerName;
+    private TextView tvOwnerPhone;
+    private TextView tvOwnerEmail;
 
     public PerfilFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PerfilFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PerfilFragment newInstance(String param1, String param2) {
-        PerfilFragment fragment = new PerfilFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        // Constructor vacío requerido
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
+        tvPerfilTitle = view.findViewById(R.id.tvPerfilTitle);
+        ivPetPhoto = view.findViewById(R.id.ivPetPhoto);
         tvPetName = view.findViewById(R.id.tvPetName);
         tvPetBreed = view.findViewById(R.id.tvPetBreed);
+        tvPetAge = view.findViewById(R.id.tvPetAge);
+        tvPetWeight = view.findViewById(R.id.tvPetWeight);
+        tvPetGender = view.findViewById(R.id.tvPetGender);
+        tvPetMicrochip = view.findViewById(R.id.tvPetMicrochip);
+        tvPetVaccines = view.findViewById(R.id.tvPetVaccines);
+        tvOwnerName = view.findViewById(R.id.tvOwnerName);
+        tvOwnerPhone = view.findViewById(R.id.tvOwnerPhone);
+        tvOwnerEmail = view.findViewById(R.id.tvOwnerEmail);
+
+        // Se asignan o reafirman datos de la mascota dinámicamente
+        tvPetName.setText("Lucas");
+        tvPetBreed.setText("Golden Retriever");
+        tvPetAge.setText("Edad: 3 años");
+        tvPetWeight.setText("Peso: 28 kg");
+        tvPetGender.setText("Género: Macho (Esterilizado)");
+        tvPetMicrochip.setText("Microchip: ID 985141002345678");
+        tvPetVaccines.setText("Vacunación: Al día (Séxtuple, Rabia, Tos de perreras)");
+
+        tvOwnerName.setText("Propietario: Carlos Gómez");
+        tvOwnerPhone.setText("Teléfono: +57 300 123 4567");
+        tvOwnerEmail.setText("Email: carlos.gomez@email.com");
 
         return view;
     }

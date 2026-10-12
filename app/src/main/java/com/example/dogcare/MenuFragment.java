@@ -1,5 +1,6 @@
 package com.example.dogcare;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,18 +8,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class MenuFragment extends Fragment {
+
+    public interface OnMenuOptionSelectedListener {
+        void onPerfilSelected();
+        void onFotosSelected();
+        void onServiciosSelected();
+        void onCitasSelected();
+    }
 
     private Button btnPerfil;
     private Button btnFotos;
     private Button btnServicios;
     private Button btnCitas;
 
+    private OnMenuOptionSelectedListener listener;
+
     public MenuFragment() {
         // Constructor vacío requerido
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnMenuOptionSelectedListener) {
+            listener = (OnMenuOptionSelectedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " debe implementar OnMenuOptionSelectedListener");
+        }
     }
 
     @Override
@@ -34,35 +54,36 @@ public class MenuFragment extends Fragment {
         btnServicios = view.findViewById(R.id.btnServicios);
         btnCitas = view.findViewById(R.id.btnCitas);
 
-        btnPerfil.setOnClickListener(v -> mostrarPerfil());
-        btnFotos.setOnClickListener(v -> mostrarFotos());
-        btnServicios.setOnClickListener(v -> mostrarServicios());
-        btnCitas.setOnClickListener(v -> mostrarCitas());
+        btnPerfil.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onPerfilSelected();
+            }
+        });
+
+        btnFotos.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onFotosSelected();
+            }
+        });
+
+        btnServicios.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onServiciosSelected();
+            }
+        });
+
+        btnCitas.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onCitasSelected();
+            }
+        });
 
         return view;
     }
 
-    private void mostrarPerfil() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new PerfilFragment())
-                .commit();
-    }
-
-    private void mostrarFotos() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new FotosFragment())
-                .commit();
-    }
-
-    private void mostrarServicios() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new ServiciosFragment())
-                .commit();
-    }
-
-    private void mostrarCitas() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new CitasFragment())
-                .commit();
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
     }
 }

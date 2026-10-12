@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MenuFragment.OnMenuOptionSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +21,39 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.leftFragmentContainer, new MenuFragment())
+                    .replace(R.id.rightFragmentContainer, new PerfilFragment())
+                    .commit();
+        }
+    }
+
+    @Override
+    public void onPerfilSelected() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.leftFragmentContainer, new MenuFragment())
                 .replace(R.id.rightFragmentContainer, new PerfilFragment())
+                .commit();
+    }
+
+    @Override
+    public void onFotosSelected() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.rightFragmentContainer, new FotosFragment())
+                .commit();
+    }
+
+    @Override
+    public void onServiciosSelected() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.rightFragmentContainer, new ServiciosFragment())
+                .commit();
+    }
+
+    @Override
+    public void onCitasSelected() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.rightFragmentContainer, new CitasFragment())
                 .commit();
     }
 }
