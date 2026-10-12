@@ -5,4 +5,10 @@
     <color name="green">#6B8E23</color>
     <color name="beige">#F5E6CA</color>
     <color name="brown">#8B5E3C</color>
+    <color name="estado_pendiente">#E0A100</color>
+    <color name="estado_confirmada">#6B8E23</color>
+    <color name="estado_en_atencion">#1E88E5</color>
+    <color name="estado_atendida">#455A64</color>
+    <color name="estado_cancelada">#C62828</color>
+    <color name="estado_no_asistio">#8E8E8E</color>
 </resources>

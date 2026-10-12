@@ -1,22 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvPetName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lucas"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvPetBreed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Golden Retriever" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivFotoPerfil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@color/beige"
+            android:contentDescription="Foto de perfil"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_camera"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.DogCare.Circle"
+            app:strokeColor="@color/green"
+            app:strokeWidth="3dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvPetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Lucas"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPetBreed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Golden Retriever"
+            android:textColor="@color/brown" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/beige"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvPetEdad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvPetPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvDueno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvProximaCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/green" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnEditarPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/green"
+            android:text="Editar perfil"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnCambiarFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/brown"
+            android:text="Cambiar foto de perfil"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnVerFotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/brown"
+            android:text="Ver fotos"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnHistoriaClinica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/green"
+            android:text="Historia clínica"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnAgendarDesdePerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/beige"
+            android:text="Agendar cita"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+</ScrollView>

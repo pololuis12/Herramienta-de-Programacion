@@ -12,12 +12,17 @@ import androidx.fragment.app.Fragment;
 
 public class ServiciosFragment extends Fragment {
 
+    private static final String STATE_SERVICIO = "servicio_seleccionado";
+
     private Button btnConsulta;
     private Button btnVacunacion;
     private Button btnBanoPeluqueria;
     private Button btnCirugiaMenor;
     private Button btnDesparasitacion;
+    private Button btnAgendarServicio;
     private TextView tvServicioDetalle;
+
+    private String servicioSeleccionado;
 
     public ServiciosFragment() {
         // Constructor vacío requerido
@@ -33,32 +38,58 @@ public class ServiciosFragment extends Fragment {
         btnBanoPeluqueria = view.findViewById(R.id.btnBanoPeluqueria);
         btnCirugiaMenor = view.findViewById(R.id.btnCirugiaMenor);
         btnDesparasitacion = view.findViewById(R.id.btnDesparasitacion);
+        btnAgendarServicio = view.findViewById(R.id.btnAgendarServicio);
         tvServicioDetalle = view.findViewById(R.id.tvServicioDetalle);
 
-        btnConsulta.setOnClickListener(v -> mostrarDetalleServicio(
-                "Consulta general",
-                "Valoración clínica del estado de salud de la mascota."));
+        btnConsulta.setOnClickListener(v -> mostrarDetalleServicio("Consulta general"));
+        btnVacunacion.setOnClickListener(v -> mostrarDetalleServicio("Vacunación"));
+        btnBanoPeluqueria.setOnClickListener(v -> mostrarDetalleServicio("Baño y peluquería"));
+        btnCirugiaMenor.setOnClickListener(v -> mostrarDetalleServicio("Cirugía menor"));
+        btnDesparasitacion.setOnClickListener(v -> mostrarDetalleServicio("Desparasitación"));
 
-        btnVacunacion.setOnClickListener(v -> mostrarDetalleServicio(
-                "Vacunación",
-                "Aplicación de vacunas según el esquema recomendado para la edad y especie."));
+        btnAgendarServicio.setOnClickListener(v -> ((MainActivity) requireActivity())
+                .navegarA(CitasFragment.newInstance(servicioSeleccionado)));
 
-        btnBanoPeluqueria.setOnClickListener(v -> mostrarDetalleServicio(
-                "Baño y peluquería",
-                "Baño, corte y cuidado estético de la mascota."));
-
-        btnCirugiaMenor.setOnClickListener(v -> mostrarDetalleServicio(
-                "Cirugía menor",
-                "Procedimientos quirúrgicos ambulatorios de baja complejidad."));
-
-        btnDesparasitacion.setOnClickListener(v -> mostrarDetalleServicio(
-                "Desparasitación",
-                "Tratamiento antiparasitario interno y externo."));
+        if (savedInstanceState != null && savedInstanceState.getString(STATE_SERVICIO) != null) {
+            mostrarDetalleServicio(savedInstanceState.getString(STATE_SERVICIO));
+        }
 
         return view;
     }
 
-    private void mostrarDetalleServicio(String nombre, String descripcion) {
-        tvServicioDetalle.setText(nombre + ": " + descripcion);
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) requireActivity()).marcarSeccion(R.id.btnServicios);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_SERVICIO, servicioSeleccionado);
+    }
+
+    private void mostrarDetalleServicio(String nombre) {
+        servicioSeleccionado = nombre;
+        tvServicioDetalle.setText(nombre + ": " + descripcion(nombre));
+        btnAgendarServicio.setText("Agendar " + nombre.toLowerCase());
+        btnAgendarServicio.setVisibility(View.VISIBLE);
+    }
+
+    private String descripcion(String nombre) {
+        switch (nombre) {
+            case "Consulta general":
+                return "Valoración clínica del estado de salud de la mascota.";
+            case "Vacunación":
+                return "Aplicación de vacunas según el esquema recomendado para la edad y especie.";
+            case "Baño y peluquería":
+                return "Baño, corte y cuidado estético de la mascota.";
+            case "Cirugía menor":
+                return "Procedimientos quirúrgicos ambulatorios de baja complejidad.";
+            case "Desparasitación":
+                return "Tratamiento antiparasitario interno y externo.";
+            default:
+                return "";
+        }
     }
 }

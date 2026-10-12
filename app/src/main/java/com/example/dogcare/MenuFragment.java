@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class MenuFragment extends Fragment {
@@ -16,6 +15,8 @@ public class MenuFragment extends Fragment {
     private Button btnFotos;
     private Button btnServicios;
     private Button btnCitas;
+
+    private int seleccionId = R.id.btnPerfil;
 
     public MenuFragment() {
         // Constructor vacío requerido
@@ -34,35 +35,29 @@ public class MenuFragment extends Fragment {
         btnServicios = view.findViewById(R.id.btnServicios);
         btnCitas = view.findViewById(R.id.btnCitas);
 
-        btnPerfil.setOnClickListener(v -> mostrarPerfil());
-        btnFotos.setOnClickListener(v -> mostrarFotos());
-        btnServicios.setOnClickListener(v -> mostrarServicios());
-        btnCitas.setOnClickListener(v -> mostrarCitas());
+        btnPerfil.setOnClickListener(v -> navegarA(new PerfilFragment()));
+        btnFotos.setOnClickListener(v -> navegarA(new FotosFragment()));
+        btnServicios.setOnClickListener(v -> navegarA(new ServiciosFragment()));
+        btnCitas.setOnClickListener(v -> navegarA(new CitasFragment()));
+
+        marcarSeleccion(seleccionId);
 
         return view;
     }
 
-    private void mostrarPerfil() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new PerfilFragment())
-                .commit();
+    private void navegarA(Fragment destino) {
+        ((MainActivity) requireActivity()).navegarA(destino);
     }
 
-    private void mostrarFotos() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new FotosFragment())
-                .commit();
-    }
-
-    private void mostrarServicios() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new ServiciosFragment())
-                .commit();
-    }
-
-    private void mostrarCitas() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.rightFragmentContainer, new CitasFragment())
-                .commit();
+    public void marcarSeleccion(int botonId) {
+        seleccionId = botonId;
+        if (btnPerfil == null) {
+            return;
+        }
+        for (Button boton : new Button[]{btnPerfil, btnFotos, btnServicios, btnCitas}) {
+            boolean seleccionado = boton.getId() == botonId;
+            boton.setAlpha(seleccionado ? 1f : 0.55f);
+            boton.setSelected(seleccionado);
+        }
     }
 }
